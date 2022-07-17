@@ -1,14 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+$main_light: #FFFFFF;
+$main_mid: #F7F6F3;
+$main_dark: #E8E7E3;
+
+$text_innactive: #19171199;
+$text_active: #000000;
+
+$shade_blue: #007DFF;
+$shade_lightBlue: #C8E2FF;
+$shade_lighterBlue: #D2E4F8;
+$shade_red: #FF605C;
+$shade_yellow: #FFBD44; 
+$shade_green: #89CA00;
 
 *, *::before, *::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .App {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: relative;
+  background: $main_light;
+  color: $text_active;
+
+  button {
+    background: none;
+    border: none;
+    outline: none;
+    color: inherit;
+    font-family: 'Inter', sans-serif;
+    font-size: inherit;
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  li {
+    list-style: none;
+  }
 }
