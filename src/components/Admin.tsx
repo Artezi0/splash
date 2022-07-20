@@ -3,6 +3,9 @@ import { UserAuth } from '../context/AuthContext'
 import '../styles/app.scss'
 
 export default function Admin() {
+  const [ userModule, setUserModule ] = useState(false)
+  const [ userEdit, setUserEdit ] = useState(false)
+
   const { user, logout, onUpdate, getActive } = UserAuth()
   const [ link, setLink ] = useState(undefined)
 
@@ -14,21 +17,37 @@ export default function Admin() {
     })
   }
 
-  function onPublish() {
-    setLink('http://localhost:3000/' + getActive().id)
-  }
-
   if (user) {
     return (
-      <section>
-        <div>
-          <p>{user.email}</p>
-          <button type='button' onClick={logout}>Log out</button>
-        </div>
+      <section className='admin'>
         {getActive() ? 
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-          {link && <a href={link}>Link to site</a>}
-          <input 
+        <div className='admin__main'>
+          {userModule && 
+          <div className='admin__main-config'>
+            User Config
+          </div>
+          }
+          <div className='admin__main-topbar'>
+            <div className='topbar__menu'>
+              <div className='topbar__menu-logo'>
+                <div className='logo'></div>
+                <h1>Splash</h1>
+              </div>
+              <li>Appereance</li>
+              <li>Settings</li>
+              <a href={'http://localhost:3000/' + getActive().id}>Site Link</a>
+            </div>
+
+            <div className='topbar__account'>
+              <img src={user.photoURL ? user.photoURL : 'https://st3.depositphotos.com/7486768/17806/v/450/depositphotos_178065822-stock-illustration-profile-anonymous-face-icon-gray.jpg'} 
+                onClick={() => setUserModule(!userModule)}
+                width={30}
+              />
+              <button type='button'>Publish</button>
+            </div>   
+          </div>
+
+          {/* <input 
             type="text" 
             placeholder='title'
             value={getActive().title}
@@ -45,9 +64,9 @@ export default function Admin() {
             placeholder='body'
             value={getActive().body}
             onChange={(e) => onEdit('body', e.target.value)}  
-          />
-          <button type='button' onClick={onPublish}>Publish</button>
-        </div> : <p>Loading...</p>
+          /> */}
+        </div> : 
+        <p className='admin__load'>Loading...</p>
         }
       </section>
     )

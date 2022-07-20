@@ -29,7 +29,7 @@ export function AuthContextProvider({ children }) {
   const [ error, setError ] = useState(false)
 
   const navigate = useNavigate()
-  
+
   useEffect(() => {
     const authChange = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)

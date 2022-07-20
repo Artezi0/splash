@@ -14,26 +14,31 @@ export default function App() {
   const { datas } = UserAuth()
 
   return (
-    <Routes>
-      <Route path='/' >
-        <Route index element={signIn ? <SignIn isSignIn={isSignIn}/> : <SignUp isSignIn={isSignIn}/>} />
-        <Route path='admin' element={<Admin />}/>
-        {datas.map(({id, title, bio, body}) => {
-          return (
-            <Route 
-              key={id}
-              path={id} 
-              element={
-                <View 
-                  title={title}
-                  bio={bio}
-                  body={body}
-                />
-              } 
-            />
-          )
-        })}
-      </Route>
-    </Routes>
+    <main className='App'>
+      <Routes>
+        <Route path='/' >
+          <Route index element={signIn ? 
+            <SignIn isSignIn={isSignIn}/> : 
+            <SignUp isSignIn={isSignIn}/>
+          } />
+          <Route path='admin' element={<Admin />}/>
+          {datas.map(({id, title, bio, body}) => {
+            return (
+              <Route 
+                key={id}
+                path={id} 
+                element={
+                  <View 
+                    title={title}
+                    bio={bio}
+                    body={body}
+                  />
+                } 
+              />
+            )
+          })}
+        </Route>
+      </Routes>
+    </main>
   )
 }
