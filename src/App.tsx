@@ -22,7 +22,13 @@ export default function App() {
             <SignUp isSignIn={isSignIn}/>
           } />
           <Route path='admin' element={<Admin />}/>
-          {datas.map(({id, title, bio, body}) => {
+          {datas.map(({
+            id, 
+            title, 
+            bio, 
+            body,
+            cover
+          }) => {
             return (
               <Route 
                 key={id}
@@ -32,6 +38,7 @@ export default function App() {
                     title={title}
                     bio={bio}
                     body={body}
+                    cover={cover}
                   />
                 } 
               />

@@ -13,7 +13,7 @@ interface UserContextType {
   signUp: (email: any, pass: any) => void
   signIn: (email: any, pass: any) => void
   logout: () => void,
-  onAdd: (title, bio, body, uid) => Promise<void>
+  onAdd: (uid) => Promise<void>
   onUpdate: (updated) => Promise<void>
   getActive: () => any
   user: User
@@ -60,7 +60,7 @@ export function AuthContextProvider({ children }) {
       const user = userCredential.user;
 
       navigate('/admin')
-      onAdd('title', 'bio', 'body', user.uid)
+      onAdd(user.uid)
     })
     .catch((err) => {
       console.warn(err)
@@ -86,20 +86,30 @@ export function AuthContextProvider({ children }) {
     navigate('/')
   }
 
-  async function onAdd(title, bio, body, uid) {
-    await setDoc(doc(db, 'sites', uid), {
-      title: title,
-      bio: bio,
-      body: body,
-    })
+  async function onAdd(uid) {
+    let newNote = {
+      title: 'Untitled',
+      body: `# Hello world`,
+      bio: `# Hello world`,
+      cover: {
+        isCover: false,
+        value: '#E8E7E3'
+      },
+    }
+
+    await setDoc(doc(db, 'sites', uid), newNote)
     console.log('added')
   }
 
   async function onUpdate(updated) {
     await updateDoc(doc(db, 'sites', user.uid), {
       title: updated.title,
-      bio: updated.bio,
       body: updated.body,
+      bio: updated.body,
+      cover: {
+        isCover: updated.cover.isCover,
+        value: updated.cover.value
+      }
     })
   }
 
