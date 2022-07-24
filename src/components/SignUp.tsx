@@ -19,28 +19,31 @@ export default function SignUp({ isSignIn }) {
   }
 
   return (
-    <section>
-      Sign Up 
-      <button type="button" onClick={() => isSignIn(true)}>Already have an account?</button>
-      <form onSubmit={onSubmit}>
+    <section className="signup">
+      <div className="signup__header">
+        <div className="signup__header-logo"></div>
+        <h1>Sign Up to continue</h1>
+        <button type="button" onClick={() => isSignIn(true)}>Already have an account?</button>
+      </div>
+      <form onSubmit={onSubmit} className='signup__form'>
         <input 
           required  
           type="email"
-          placeholder="email"
+          placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <input 
           required
           type="password" 
-          placeholder="password"
+          placeholder="Password"
           onChange={(e) => setPass(e.target.value)}
         />
         <input 
           type="text" 
-          placeholder="confirm password"
+          placeholder="Confirm password"
           onChange={(e) => setConfirmPass(e.target.value)}  
         />
-        <button type="submit">Submit</button>
+        <button type="submit">Sign Up</button>
       </form>
     </section>
   )

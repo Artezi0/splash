@@ -30,6 +30,37 @@ export function AuthContextProvider({ children }) {
 
   const navigate = useNavigate()
 
+  const icon = () => {
+    const denoColors = [
+      ["#fecaca", "#dc2626", "#7f1d1d"],
+      ["#d9f99d", "#65a30d", "#365314"],
+      ["#a7f3d0", "#059669", "#064e3b"],
+      ["#bae6fd", "#0284c7", "#0c4a6e"],
+      ["#ddd6fe", "#7c3aed", "#4c1d95"],
+    ]
+
+    const bgColors = [
+      "#fee2e2",
+      "#ffedd5",
+      "#fef3c7",
+      "#fef9c3",
+      "#ecfccb",
+      "#dcfce7",
+      "#d1fae5",
+      "#ccfbf1",
+    ]
+    
+    const denoColor = Math.floor(Math.random() * denoColors.length)    
+    const bgColor = Math.floor(Math.random() * bgColors.length)    
+
+    return(
+      [
+        denoColors[denoColor],
+        bgColors[bgColor] 
+      ]
+    )
+  }
+
   useEffect(() => {
     const authChange = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
@@ -88,6 +119,10 @@ export function AuthContextProvider({ children }) {
 
   async function onAdd(uid) {
     let newNote = {
+      profile: {
+        theme: icon()[0],
+        background: icon()[1]
+      },
       title: 'Untitled',
       body: `# Hello world`,
       bio: `# Hello world`,

@@ -1,0 +1,64 @@
+@import 'var.scss';
+
+.signup {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__header {
+    text-align: center;
+    
+    &-logo {
+      width: 40px;
+      aspect-ratio: 1/1;
+      margin: 0 auto;
+      background: rgb(63,94,251);
+      background: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+      border-radius: 50%;
+    }
+
+    & > h1 {
+      font-size: 40px;
+      font-weight: 700;
+      margin: .5em 13em;
+      line-height: 90%;
+    }
+
+    & > button {
+      background: none;
+      color: $shade_blue;
+      font-weight: 600;
+    }
+  }
+
+  &__form {
+    margin-top: 1em;
+    text-align: center;
+
+    & > input {
+      display: block;
+      margin: .2em 0;
+      padding: .5em 3em .5em .5em;
+      border: 1px solid $main_dark;
+      border-radius: 4px;
+      font-weight: 600;
+
+      &::placeholder {
+        color: $text_innactive;
+      }
+    }
+
+    & > button {
+      width: 100%;
+      margin: .5em 0;
+      color: $main_light;
+      background: $shade_blue;
+      border-radius: 4px;
+      padding: .5em;
+      font-weight: 14px;
+    }
+  }
+}
