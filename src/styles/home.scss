@@ -49,6 +49,7 @@
       background: $main_light;
       border-radius: 4px;
       user-select: none;
+      z-index: 10;
 
       & > h3 {
         width: 100%;
@@ -123,7 +124,6 @@
         display: flex;
         align-items: center;
         gap: .5em;
-        color: $shade_blue;
       }
     }
 
@@ -176,7 +176,7 @@
 
       .topbar__site {
         font-weight: 600;
-        margin-right: 12em;
+        margin-right: 9em;
 
         span {
           font-weight: 500;
@@ -207,22 +207,107 @@
     }
 
     &-edit {
+      width: 100%;
+      height: calc(100% - 50px);
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       
       .edit__cover {
+        position: absolute;
         width: 100%;
-        height: 12em;
-        z-index: 1;
+        height: 15em;
+
+        &-actions {
+          display: none;
+          position: absolute;
+          right: 16px;
+          bottom: 16px;
+
+          & > button {
+            margin: 0 .2em;
+            padding: .2em .4em;
+            font-weight: 600;
+            color: $text_innactive;
+            background: $main_mid;
+            border-radius: 4px;
+          }
+        }
+
+        &:hover .edit__cover-actions {
+          display: block;
+        }
       }
 
-      .edit__avatar {
-        z-index: 2;
-        width: 15em;
-        aspect-ratio: 1/1;
-        margin-top: 6em;
-        border-radius: 50%;
+      .edit__info {
+        width: 100%;
+        height: 100%;
+        
+        &-icon {
+          display: block;
+          margin: 5em 3em 1em 3em;
+          border-radius: 50%;
+          position: relative;
+          z-index: 2;
+        }
+
+        &-actions {
+          margin: 0 3em;
+          user-select: none;
+
+          & > button {
+            margin-right: .5em;
+            padding: .2em .4em;
+            font-size: 14px;
+            font-weight: 600;
+            color: $text_innactive;
+            background: $main_dark;
+            border-radius: 4px;
+          }
+        }
+
+        & > .title {
+          margin: 0 3em;
+
+          .cm-line {
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -.5px;
+            padding: 0;
+            
+            .cm-placeholder {
+              font-size: inherit;
+              font-weight: inherit;
+              letter-spacing: inherit;
+              color: $text_innactive;
+            }
+          }
+      
+          .cm-editor { background: none; }
+          .cm-editor.cm-focused { outline: none; }
+        }
+
+        & > .bio {
+          width: 50em;
+          margin: 0 3em;
+
+          .cm-line {
+            font-size: 16px;
+            color: $text_innactive;
+            text-align: justify;
+            padding: 0;
+            
+            .cm-placeholder {
+              font-size: inherit;
+              font-weight: inherit;
+              letter-spacing: inherit;
+              color: $text_innactive;
+            }
+          }
+          
+          .cm-editor { background: none; }
+          .cm-editor.cm-focused { outline: none; }
+        }
       }
     }
   }

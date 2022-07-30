@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@codemirror/view": "^6.1.2",
     "@uiw/react-codemirror": "^4.11.4",
     "@uiw/react-textarea-code-editor": "^2.0.3",
     "firebase": "^9.9.0",

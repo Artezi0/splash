@@ -1,5 +1,7 @@
 import QRCode from 'react-qr-code'
 import { FaCaretRight, FaCaretDown } from 'react-icons/fa'
+import CodeMirror from '@uiw/react-codemirror'
+import { EditorView } from '@codemirror/view'
 
 import { useRef, useState, useEffect } from 'react'
 import { UserAuth } from '../context/AuthContext'
@@ -73,8 +75,12 @@ export default function Admin() {
           </svg>
           Copy Splash link
         </button>
-        <button type='button'>Download PNG</button>
-        <button type='button'>Download SVG</button>
+        <button type='button'>
+          <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.31543 19.1816H12.6846C14.5742 19.1816 15.5498 18.1885 15.5498 16.29V8.30957C15.5498 7.0791 15.3916 6.5166 14.627 5.73438L10.0303 1.06738C9.2832 0.311523 8.66797 0.135742 7.56055 0.135742H3.31543C1.43457 0.135742 0.450195 1.12891 0.450195 3.03613V16.29C0.450195 18.1885 1.43457 19.1816 3.31543 19.1816ZM3.46484 17.4238C2.62109 17.4238 2.19922 16.9844 2.19922 16.1758V3.1416C2.19922 2.3418 2.62109 1.89355 3.47363 1.89355H7.2002V6.6748C7.2002 7.94922 7.82422 8.56445 9.08984 8.56445H13.8008V16.1758C13.8008 16.9844 13.3789 17.4238 12.5264 17.4238H3.46484ZM9.25684 7.02637C8.8877 7.02637 8.72949 6.86816 8.72949 6.50781V2.12207L13.5635 7.02637H9.25684ZM8.77344 10.2783C8.77344 9.84766 8.42188 9.53125 8 9.53125C7.57812 9.53125 7.22656 9.84766 7.22656 10.2783V12.9326L7.29688 14.2861L6.62012 13.583L5.96094 12.9062C5.8291 12.7656 5.62695 12.6689 5.44238 12.6689C5.03809 12.6689 4.73926 12.959 4.73926 13.3457C4.73926 13.5654 4.82715 13.7324 4.99414 13.8818L7.41113 16.0967C7.61328 16.2812 7.78027 16.3691 8 16.3691C8.21973 16.3691 8.38672 16.2812 8.58887 16.0967L11.0059 13.8818C11.1729 13.7324 11.2607 13.5654 11.2607 13.3457C11.2607 12.959 10.9619 12.6689 10.5576 12.6689C10.373 12.6689 10.1709 12.7656 10.0391 12.9062L9.37988 13.583L8.70312 14.2861L8.77344 12.9326V10.2783Z" fill="#1C1C1E"/>
+          </svg>
+          Download QR
+        </button>
       </div>
     )
   }
@@ -100,8 +106,10 @@ export default function Admin() {
 
     return (
       <div className='edit__cover' style={{ background: getActive().cover.value }}>
-        <button type='button' onClick={() => onUpdate({...getActive(),cover: {isCover: false, value: getActive().cover.value}})}>Remove</button>
-        <button type='button' onClick={handleColor}>Randomize</button>
+        <div className="edit__cover-actions">
+          <button type='button' onClick={handleColor}>Randomize</button>
+          <button type='button' onClick={() => onUpdate({...getActive(),cover: {isCover: false, value: getActive().cover.value}})}>Remove</button>
+        </div>
       </div>
     )
   }
@@ -146,8 +154,8 @@ export default function Admin() {
                     d="M77.4624 78.9593C78.2802 68.3428 73.7143 58.8833 71.3291 55.4806L87.6847 48.335C92.5913 49.9683 94.1587 65.6887 94.3291 73.3448C94.3291 73.3448 90.7513 73.8552 88.7069 75.3864C86.6219 76.948 83.0847 80.4905 77.4624 78.9593Z"
                     fill="white"
                     stroke="#84B5D9"
-                    stroke-width="3"
-                    stroke-linecap="round"
+                    strokeWidth="3"
+                    strokeLinecap="round"
                   />
                   <path
                     d="M86.4336 58C87.3281 58 88.3914 58 88.3914 61C91.0574 61.9999 91.3914 67.5 85.3914 70C80.5914 72 79.3914 67.8333 79.3914 65.5C77.9336 64.5 77.6336 62.3 78.4336 61.5C79.2336 60.7 81.3914 61.5 81.8914 62.5L84.8914 61C84.3914 60.5 84.9336 58 86.4336 58H86.4336Z"
@@ -157,22 +165,22 @@ export default function Admin() {
                     d="M7.06239 52.159C-5.55748 54.1782 -12.682 66.0659 -17.661 73.2769C-18.5194 86.6687 -18.2791 114.379 -10.45 118.088C-2.62094 121.797 16.5053 119.633 25.0898 118.088V122.209C26.4634 122.724 30.1375 123.857 33.846 124.269C37.5545 124.681 40.542 123.067 41.5721 122.209V112.422C42.0872 112.079 44.5595 110.465 50.3283 106.756C57.5393 102.121 61.6598 90.274 60.1146 82.0331C58.9557 75.8521 63.7201 63.4904 66.2955 55.2493C76.0818 57.3094 88.4435 54.2192 89.4736 40.3124C90.1205 31.5801 80.7174 19.9868 63.2051 25.3752C45.6927 30.7636 48.268 52.159 41.5721 59.37C35.3913 53.1891 23.5446 49.5219 7.06239 52.159Z"
                     fill={getActive().profile.theme[0]}
                     stroke={getActive().profile.theme[2]}
-                    stroke-width="3"
-                    stroke-linecap="round"
+                    strokeWidth="3"
+                    strokeLinecap="round"
                   />
                   <path
                     d="M66.2955 55.2493C64.5786 54.7342 60.9387 53.6011 60.1146 53.189"
                     stroke={getActive().profile.theme[1]}
-                    stroke-opacity="0.37"
-                    stroke-width="3"
-                    stroke-linecap="round"
+                    strokeOpacity="0.37"
+                    strokeWidth="3"
+                    strokeLinecap="round"
                   />
                   <path
                     d="M41.5721 59.3698C40.8853 60.2283 38.8937 62.1512 36.4214 62.9753"
                     stroke={getActive().profile.theme[1]}
-                    stroke-opacity="0.37"
-                    stroke-width="3"
-                    stroke-linecap="round"
+                    strokeOpacity="0.37"
+                    strokeWidth="3"
+                    strokeLinecap="round"
                   />
                   <circle cx="68.8708" cy="42.8876" r="2.06028" fill="black" />
                 </g>
@@ -184,41 +192,82 @@ export default function Admin() {
           </div>
           <div className='admin__main-edit'>
             {getActive().cover.isCover && <Cover />}
-            <div className="edit__info">              
-              <div className="edit__info-action">
-                <button 
-                  type='button' 
-                  onClick={() => onUpdate({
-                    ...getActive(),
-                    cover: {
-                      isCover: true,
-                      value: getActive().cover.value
-                    },
-                  })}>Cover</button>
+            <div className="edit__info"
+              style={{
+                marginTop: getActive().cover.isCover ? '6em' : 0  
+              }}
+            >      
+              <div className="edit__info-avatar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" className='edit__info-icon'>
+                  <g>
+                    <rect width="112" height="112" fill={getActive().profile.background} />
+                    <path
+                      d="M77.4624 78.9593C78.2802 68.3428 73.7143 58.8833 71.3291 55.4806L87.6847 48.335C92.5913 49.9683 94.1587 65.6887 94.3291 73.3448C94.3291 73.3448 90.7513 73.8552 88.7069 75.3864C86.6219 76.948 83.0847 80.4905 77.4624 78.9593Z"
+                      fill="white"
+                      stroke="#84B5D9"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M86.4336 58C87.3281 58 88.3914 58 88.3914 61C91.0574 61.9999 91.3914 67.5 85.3914 70C80.5914 72 79.3914 67.8333 79.3914 65.5C77.9336 64.5 77.6336 62.3 78.4336 61.5C79.2336 60.7 81.3914 61.5 81.8914 62.5L84.8914 61C84.3914 60.5 84.9336 58 86.4336 58H86.4336Z"
+                      fill="#B1DEFF"
+                    />
+                    <path
+                      d="M7.06239 52.159C-5.55748 54.1782 -12.682 66.0659 -17.661 73.2769C-18.5194 86.6687 -18.2791 114.379 -10.45 118.088C-2.62094 121.797 16.5053 119.633 25.0898 118.088V122.209C26.4634 122.724 30.1375 123.857 33.846 124.269C37.5545 124.681 40.542 123.067 41.5721 122.209V112.422C42.0872 112.079 44.5595 110.465 50.3283 106.756C57.5393 102.121 61.6598 90.274 60.1146 82.0331C58.9557 75.8521 63.7201 63.4904 66.2955 55.2493C76.0818 57.3094 88.4435 54.2192 89.4736 40.3124C90.1205 31.5801 80.7174 19.9868 63.2051 25.3752C45.6927 30.7636 48.268 52.159 41.5721 59.37C35.3913 53.1891 23.5446 49.5219 7.06239 52.159Z"
+                      fill={getActive().profile.theme[0]}
+                      stroke={getActive().profile.theme[2]}
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M66.2955 55.2493C64.5786 54.7342 60.9387 53.6011 60.1146 53.189"
+                      stroke={getActive().profile.theme[1]}
+                      strokeOpacity="0.37"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M41.5721 59.3698C40.8853 60.2283 38.8937 62.1512 36.4214 62.9753"
+                      stroke={getActive().profile.theme[1]}
+                      strokeOpacity="0.37"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                    />
+                    <circle cx="68.8708" cy="42.8876" r="2.06028" fill="black" />
+                  </g>
+                </svg>
+              </div>        
+              <CodeMirror
+                className='title'
+                placeholder='Site title'
+                basicSetup={false}
+                value={getActive().title}
+                onChange={(value) => onEdit('title', value)}
+                extensions={[
+                  EditorView.lineWrapping
+                ]}
+              />
+              <CodeMirror
+                className='bio'
+                placeholder='Site bio'
+                basicSetup={false}
+                value={getActive().bio}
+                onChange={(value) => {onEdit('bio', value)}}
+                extensions={[
+                  EditorView.lineWrapping
+                ]}
+              />
+              <div className="edit__info-actions">
+                <button type='button'>Link socials</button>
+                <button type='button'  onClick={() => onUpdate({...getActive(),cover: {isCover: true, value: getActive().cover.value}})}>Add cover</button>
               </div>
-            <input
-              type='text'
-              value={getActive().title}
-              placeholder="Title"
-              onChange={(e) => onEdit('title', e.target.value)}
-              />
-            <input
-              type='text'
-              value={getActive().bio}
-              placeholder="Bio"
-              onChange={(e) => onEdit('bio', e.target.value)}
-              />
-            <input
-              type='text'
-              value={getActive().body}
-              placeholder="Body"
-              onChange={(e) => onEdit('body', e.target.value)}
-              />
             </div>
           </div>
         </div> : 
         <div className='admin__load'>
-          <div className='admin__load-logo'></div>
+          <svg width="56" height="76" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M59.939 120V80.0814H79.9593V40.0407H59.939V0H39.9186V40.0407H19.8983V80.0814H39.9186V120H59.939ZM19.8983 40.0407V20.0203H0V40.0407H19.8983ZM99.9796 40.0407V20.0203H79.9593V40.0407H99.9796ZM19.8983 99.9797V80.0814H0V99.9797H19.8983ZM99.9796 99.9797V80.0814H79.9593V99.9797H99.9796Z" fill="#FF462D"/>
+          </svg>
           <p className='admin__load-info'>Fetching data</p>
         </div>
         }

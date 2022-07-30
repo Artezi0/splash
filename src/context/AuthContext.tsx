@@ -140,7 +140,7 @@ export function AuthContextProvider({ children }) {
     await updateDoc(doc(db, 'sites', user.uid), {
       title: updated.title,
       body: updated.body,
-      bio: updated.body,
+      bio: updated.bio,
       cover: {
         isCover: updated.cover.isCover,
         value: updated.cover.value
