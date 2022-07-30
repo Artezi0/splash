@@ -29,6 +29,8 @@ $shade_green: #89CA00;
   height: 100vh;
   position: relative;
   color: $text_active;
+  background: $main_mid;
+  overflow-x: hidden;
 
   button {
     border: none;

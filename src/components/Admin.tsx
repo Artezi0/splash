@@ -5,6 +5,7 @@ import { EditorView } from '@codemirror/view'
 
 import { useRef, useState, useEffect } from 'react'
 import { UserAuth } from '../context/AuthContext'
+import Tiptap from './Tiptap'
 import '../styles/app.scss'
 
 export default function Admin() {
@@ -261,6 +262,7 @@ export default function Admin() {
                 <button type='button'>Link socials</button>
                 <button type='button'  onClick={() => onUpdate({...getActive(),cover: {isCover: true, value: getActive().cover.value}})}>Add cover</button>
               </div>
+              <Tiptap />
             </div>
           </div>
         </div> : 
