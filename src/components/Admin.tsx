@@ -26,7 +26,7 @@ export default function Admin() {
     useEffect(() => {
       function handleClick(e) {
         if (ref.current && !ref.current.contains(e.target)) {
-          setUserModule(false)
+          setShare(false)
         }
       }
       document.addEventListener('mousedown', handleClick)
@@ -52,24 +52,25 @@ export default function Admin() {
   const Share = () => {
     function copyLink() {
       navigator.clipboard.writeText('http://localhost:3000/' + getActive().id).then(() => {
-        alert('Copied to clipboard')
+        setShare(false)
       })
     }
 
     return (
       <div className='admin__main-share'>
-        <div className='share__header'>
+        <div className='share__container' ref={ref}>
+        <div className='share__container-header'>
           <h3>Share</h3>
           <p>Here is your unique Linktree QR code that will direct people to your Linktree when scanned.</p>
         </div>
         <QRCode 
-          className='share__qr'
+          className='share__container-qr'
           title='Splash Site'
           value={'http://localhost:3000/' + getActive().id} 
           bgColor='#FFF'
           fgColor='#000'
           size={128}
-        />
+          />
         <button type='button' onClick={copyLink}>
           <svg width="16" height="36" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M59.939 120V80.0814H79.9593V40.0407H59.939V0H39.9186V40.0407H19.8983V80.0814H39.9186V120H59.939ZM19.8983 40.0407V20.0203H0V40.0407H19.8983ZM99.9796 40.0407V20.0203H79.9593V40.0407H99.9796ZM19.8983 99.9797V80.0814H0V99.9797H19.8983ZM99.9796 99.9797V80.0814H79.9593V99.9797H99.9796Z" fill="#FF462D"/>
@@ -82,6 +83,7 @@ export default function Admin() {
           </svg>
           Download QR
         </button>
+      </div>
       </div>
     )
   }

@@ -47,4 +47,13 @@ $shade_green: #89CA00;
   li {
     list-style: none;
   }
+
+  &::-webkit-scrollbar {
+    background: $main_mid;
+    width: 10px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $main_dark;
+  }
 }
