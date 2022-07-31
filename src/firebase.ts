@@ -3,7 +3,7 @@ import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = initializeApp({
-  apiKey: import.meta.env.VITE_FIREBASE_API,
+  apiKey: 'AIzaSyBxbZ-KvuhmKBdq0-n2Xeqisi3rgrwNVqY',
   authDomain: "splash-d0669.firebaseapp.com",
   projectId: "splash-d0669",
   storageBucket: "splash-d0669.appspot.com",
